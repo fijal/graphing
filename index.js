@@ -1,5 +1,4 @@
 function plot(r, target, title) {
-    console.log(r.map(a => a[0]));
     new Chart("stats", {
       type: "line",
       data: {
@@ -9,7 +8,19 @@ function plot(r, target, title) {
       borderColor: "rgba(0,0,0,0.1)",
       data: r.map(a => a[1])
     }]},
-});
+    options: {
+          hover: {
+                        mode: 'nearest',
+                        intersect: false,
+                        onHover: function (e, item) {
+                            if (item.length) {
+                                const data = item[0]._chart.config.data.datasets[0].data[item[0]._index];
+                                console.log(item, data);
+                            }
+                        }
+                    }
+                }
+    });
 }
 
 
